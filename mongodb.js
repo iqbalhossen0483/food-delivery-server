@@ -1,0 +1,12 @@
+const { MongoClient } = require('mongodb');
+require("dotenv").config();
+
+const mongodb = () => {
+    const uri = `mongodb+srv://${process.env.BD_USER}:${process.env.BD_PASS}@cluster0.wewoq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+    // const uri = "mongodb://localhost:27017";
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    return client;
+};
+
+module.exports = mongodb;
