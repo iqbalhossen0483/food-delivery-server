@@ -13,20 +13,14 @@ const users = database.collection("users");
 //post user
 async function postUser(req, res, next) {
     try {
-        if (req.body.type === "google") {
-            const isUser = await users.findOne({ email: req.params.email });
-            if (!isUser) {
-                const result = await users.insertOne(req.body);
-                res.send(result);
-            }
-            else {
-                res.send({ message: "user exist" });
-            }
-        }
-        else {
+        const isUser = await users.findOne({ email: req.params.email });
+        if (!isUser) {
             const result = await users.insertOne(req.body);
             res.send(result);
         }
+        else {
+            res.send({ message: "user exist" });
+        };
     } catch (err) {
         next(err);
     };
